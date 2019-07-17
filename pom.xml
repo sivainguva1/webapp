@@ -45,7 +45,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
-                <version>${maven-deploy-plugin.version}</version>
+                <version>3.0.0-M1</version>
                 <configuration>
                     <skip>true</skip>
                 </configuration>
@@ -65,7 +65,7 @@
                 </executions>
                 <configuration>
                     <serverId>nexus</serverId>
-                    <nexusUrl>nexus_url_without_path</nexusUrl>
+                    <nexusUrl>http://3.16.114.55:8081</nexusUrl>
                     <skipStaging>true</skipStaging>
                 </configuration>
             </plugin>
@@ -82,7 +82,7 @@
         </repository>
     </distributionManagement>
 	 <dependencies>
-    <dependency>
+    <dependency>	
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>3.8.1</version>
