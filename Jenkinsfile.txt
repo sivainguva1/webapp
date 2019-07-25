@@ -15,8 +15,7 @@ pipeline {
 		}
 		stage('deploy'){
 			steps{
-			sshagent(['admin']) 
-				sh "scp **/target/*.war ec2-user@172.31.43.107:8080:/root/apache-tomcat-7.0.53/webapps"
+				sh "scp -i var/lib/jenkins/devo.pem **/target/*.war ec2-user@172.31.43.107:8080:/root/apache-tomcat-7.0.53/webapps"
 
 				echo 'deployed..haha'
 			}
