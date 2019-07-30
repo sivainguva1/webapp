@@ -1,23 +1,32 @@
 pipeline {
-	agent any
-	
-	stages{
-		stage('Build'){
-            		steps {
-                		sh 'mvn clean package'
-            		}
-            		post {
-                		success {
-                    			archiveArtifacts artifacts: '**/target/*.war'
-                		}
-            		}
-		}
-		stage('deploy') {
-			steps {
-			sshagent(['admin']) {
-				sh 'sudo scp -o StrictHostKeyChecking=no target/*.war ec2-user@172.31.43.107:/root/apache-tomcat-7.0.53/webapps'
-			}
-			}
-		}
-	}
+    agent any
+parameters { 
+         string(name: 'tomcat_dev', defaultValue: '18.217.152.143', description: 'Staging Server')
+        
+    } 
+
+    triggers {
+         pollSCM('* * * * *') // Polling Source Control
+     }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn clean package' 
+                }
+                post {
+                  success
+                  {
+                    echo 'Now Archiving...'
+                          archiveArtifacts artifacts: '**/target/*.war'
+                }
+            }
+        }
+        stage('Deploy') {
+         steps {
+                        sh "pwd && ls -la"
+                        
+                        sh "sudo scp -i /varlib/jenkins/devo.pem ./target/*.war ec2-user@${params.tomcat_dev}:/root/apache-tomcat-7.0.53/webapps"
+                    }
+               }
+    }
 }
