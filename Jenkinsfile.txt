@@ -25,7 +25,7 @@ parameters {
          steps {
                         sh "pwd && ls -la"
                         
-                        sh "scp -i /var/lib/jenkins/devo.pem ./target/*.war ec2-user@${params.tomcat_dev}:/root/apache-tomcat-7.0.53/webapps"
+                        sh "sudo scp -i /var/lib/jenkins/devo.pem ./target/*.war ec2-user@${params.tomcat_dev}:/root/apache-tomcat-7.0.53/webapps"
                     }
                }
     }
