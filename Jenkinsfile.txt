@@ -23,7 +23,7 @@ parameters {
         }
         stage('Deploy') {
          steps {
-                        sh "sudo scp -i '/usr/devo.pem' ./target/*.war ec2-user@${params.tomcat_dev}:/opt/apache-tomcat-7.0.53/webapps"
+                        sh "sudo scp -i 'devo.pem' ./target/*.war ec2-user@${params.tomcat_dev}:/opt/apache-tomcat-7.0.53/webapps"
                     }
                }
     }
